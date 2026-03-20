@@ -43,7 +43,6 @@ def startGame(guessed, attempts, points, word):
         print(f"¡Perdiste! La palabra era: {word}")
         points = 0
         print(f"Puntos: {points}")
-##########
         
 my_dict = {
     "lenguaje": ["python"],
@@ -61,13 +60,19 @@ word = ""
 print("¡Bienvenido al Ahorcado!")
 print()
 
-for key in my_dict:
-    print(key)
-category = input("Seleccione una categoría: ")        
+print("Categorías disponibles:")
 
-# Verifico que la categoria exista en my_dict
-if category in my_dict:
-  word = random.choice(my_dict[category.lower()])
-  startGame(guessed, attempts, points, word) # el juego solo comienza si la categoria es válida
-else:
-    print("La categoria ingresada no existe")
+for word in my_dict:
+    print(word)
+    
+category = input("Seleccione una categoría: ")
+
+# Genero la lista de palabras con random.sample y la recorro
+# para jugar con cada palabra de la categoria seleccionada:
+
+words_my_dict = random.sample(my_dict[category], len(my_dict[category]))         
+
+for word in words_my_dict:
+    guessed = [] # reinicio las letras adivinadas
+    attempts = 6 # reinicio los intentos
+    startGame(guessed, attempts, points, word)
